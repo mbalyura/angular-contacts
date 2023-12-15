@@ -1,0 +1,19 @@
+.contacts  {
+  &__item {
+    padding: 8px 0;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid #444;
+    }
+  }
+
+  &__item-name {
+    font-size: 20px;
+    color: wheat;
+    margin-bottom: 8px;
+  }
+
+  &__item-position {
+    font-style: italic;
+  }
+}

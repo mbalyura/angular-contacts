@@ -1,0 +1,23 @@
+.header {
+  border-bottom: 1px solid #444;
+
+  &__container {
+    display: flex;
+  }
+
+  &__title {
+    padding: 16px 32px 16px 0;
+    font-weight: bold;
+  }
+
+  &__links {
+    display: flex;
+  }
+
+  &__link {
+    padding: 16px;
+    &.active {
+      background: #444;
+    }
+  }
+}

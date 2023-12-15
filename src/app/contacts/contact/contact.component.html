@@ -1,0 +1,85 @@
+<form (ngSubmit)="onSubmit()" #contactForm="ngForm">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input
+      class="form-control"
+      type="text"
+      id="name"
+      name="name"
+      ngModel
+      required
+      #name="ngModel"
+    />
+    <span class="help" *ngIf="name.invalid && name.touched">This field is required</span>
+  </div>
+
+  <div class="form-group">
+    <label for="lastname">Lastname</label>
+    <input
+      class="form-control"
+      type="text"
+      id="lastname"
+      name="lastname"
+      ngModel
+      required
+      #lastname="ngModel"
+    />
+    <span class="help" *ngIf="lastname.invalid && lastname.touched">This field is required</span>
+  </div>
+
+  <div class="form-group">
+    <label for="phone">phone</label>
+    <input
+      class="form-control"
+      type="text"
+      id="phone"
+      name="phone"
+      ngModel
+      required
+      pattern="[0-9]*"
+      #phone="ngModel"
+    />
+    <span class="help" *ngIf="phone.invalid && phone.touched">This field accepts numbers only an is required</span>
+  </div>
+
+  <div class="form-group">
+    <label for="position">Position</label>
+    <select
+      class="form-control"
+      type="text"
+      id="position"
+      name="position"
+      ngModel
+      required
+      #position="ngModel"
+    >
+      <option *ngFor="let position of positions" [value]="position[0]">{{position[1]}}</option>
+    </select>
+    <span class="help" *ngIf="position.invalid && position.touched">This field is required</span>
+  </div>
+  <div class="btn-group">
+    <button
+      class="btn"
+      type="submit"
+      [disabled]="contactForm.invalid"
+    >
+      {{ editMode ? "Update" : "Add" }}
+    </button>
+    <button
+      *ngIf="editMode"
+      class="btn btn--danger"
+      type="button"
+      (click)="onDelete()"
+    >
+      Delete
+    </button>
+  </div>
+</form>
+<hr>
+
+<div class="company" *ngIf="company">
+  <h3>Company:</h3>
+  <a [routerLink]="['/companies', company.id]">
+    {{company.name}} {{company.address}}
+  </a>
+</div>

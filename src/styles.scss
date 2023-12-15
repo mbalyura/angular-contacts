@@ -1,1 +1,176 @@
-/* You can add global styles to this file, and also import other style files */
+/*! minireset.css v0.0.6 | MIT License | github.com/jgthms/minireset.css */
+html,
+body,
+p,
+ol,
+ul,
+li,
+dl,
+dt,
+dd,
+blockquote,
+figure,
+fieldset,
+legend,
+textarea,
+pre,
+iframe {
+  margin: 0;
+  padding: 0
+}
+
+ul {
+  list-style: none
+}
+
+button,
+input,
+select {
+  margin: 0
+}
+
+html {
+  box-sizing: border-box
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit
+}
+
+img,
+video {
+  height: auto;
+  max-width: 100%
+}
+
+iframe {
+  border: 0
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0
+}
+
+td,
+th {
+  padding: 0
+}
+
+$dark-color: #333;
+$gray-color: #444;
+$white-color: #eee;
+
+body {
+  background: $dark-color;
+  color: $white-color;
+  font-size: 18px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+
+  &:not([href]) {
+    cursor: pointer;
+  }
+}
+
+hr {
+  margin: 30px 0;
+  width: 100%;
+  height: 2px;
+  background: $white-color;
+}
+
+button {
+  cursor: pointer;
+}
+
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+  border-bottom: 1px solid red;
+}
+
+.container {
+  max-width: 800px;
+  margin: auto;
+}
+
+.box {
+  padding: 50px 0;
+}
+
+.form-group {
+  margin-bottom: 32px;
+  position: relative;
+
+  label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .help {
+    position: absolute;
+    font-size: 12px;
+    bottom: -16px;
+    color: red;
+  }
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  height: 42px;
+  padding: 12px 0;
+  font-size: inherit;
+  line-height: 1.42857143;
+  color: $white-color;
+  background-color: transparent;
+  background-image: none;
+  border: none;
+  border-bottom: 1px solid $gray-color;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+
+  option {
+    background: $dark-color;
+    color: $white-color;
+  }
+}
+
+.form-control:focus {
+  outline: 0;
+}
+
+.btn-group {
+  margin-top: 16px;
+  display: flex;
+  gap: 16px;
+}
+
+.btn {
+  display: inline-block;
+  border: 1px solid transparent;
+  padding: 8px 16px;
+  font-size: 16px;
+  border-radius: 4px;
+  user-select: none;
+  background: lightblue;
+
+  &--success {
+    background-color: green;
+  }
+
+  &--warning {
+    background-color: orange;
+    color: $dark-color;
+  }
+
+  &--danger {
+    background-color: orangered;
+  }
+}

@@ -1,0 +1,15 @@
+<ul class="companies">
+  <li class="companies__item" *ngFor="let company of companies">
+    <a [routerLink]="company.id">
+      <div class="companies__item-name">
+        {{ company.name | uppercase }}
+      </div>
+      <div class="companies__item-address">
+        {{ company.address }}
+      </div>
+    </a>
+  </li>
+</ul>
+<div class="btn-group">
+  <a class="btn btn--warning" [routerLink]="['new']">Add new</a>
+</div>
