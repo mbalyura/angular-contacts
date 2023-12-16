@@ -1,9 +1,12 @@
 {
   "name": "angular-contacts",
   "version": "0.0.0",
+  "engines": {
+    "node": "18.x"
+  },
   "scripts": {
     "ng": "ng",
-    "json-server" : "npx json-server src/server/db.json",
+    "json-server": "npx json-server src/server/db.json",
     "start": "npm run json-server --watch & ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",

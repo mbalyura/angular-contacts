@@ -24,7 +24,7 @@ export class ContactComponent {
   @ViewChild('contactForm') contactForm: NgForm;
 
   constructor(
-    private contactService: ContactsService,
+    private contactsService: ContactsService,
     private companiesService: CompaniesService,
     private apiService: ApiService,
     private notificationService: NotificationService,
@@ -37,13 +37,13 @@ export class ContactComponent {
     this.editMode = !!this.route.snapshot.params['id'];
 
     if (this.editMode) {
-      this.contact = this.contactService.getContact(this.contactId);
+      this.contact = this.contactsService.getContact(this.contactId);
       this.company = this.companiesService.getCompanyByContact(this.contactId);
     }
     // this.route.params.subscribe((params: Params) => {
     //   this.contactId = +params['id'];
     //   this.editMode = !!params['id'];
-    //   this.contact = this.contactService.getContact(this.contactId);
+    //   this.contact = this.contactsService.getContact(this.contactId);
     //   this.company = this.companiesService.getCompanyByContact(this.contactId);
     // })
 
@@ -70,13 +70,12 @@ export class ContactComponent {
         .subscribe(() => this.notificationService.success('Contact updated'));
     } else {
       const {name, lastname, phone, position} =  this.contactForm.form.value
-      const id = this.contactService.getNewId();
+      const id = this.contactsService.getNewId();
       const contact = new Contact(id, name, lastname, phone, position)
 
       this.apiService.addContact(contact)
         .subscribe(() => {
           this.notificationService.success('Contact added')
-          this.contactService.addContact(contact);
           this.router.navigate(['/contacts']);
         });
     }
@@ -85,7 +84,6 @@ export class ContactComponent {
   onDelete() {
     this.apiService.deleteContact(this.contact.id)
       .subscribe(() => {
-        this.contactService.deleteContact(this.contact.id);
         this.notificationService.warning('Contact deleted');
         this.router.navigate(['/contacts']);
       })

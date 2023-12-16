@@ -34,9 +34,9 @@ export class ContactsService {
     // this.contactsChanged.next(this.contacts);
   }
 
-  updateContact(index: number, newContact: Contact) {
-    this.contacts[index] = newContact;
-  }
+  // updateContact(index: number, newContact: Contact) {
+  //   this.contacts[index] = newContact;
+  // }
 
   updateContacts(contacts: Contact[]) {
     this.contacts = contacts;

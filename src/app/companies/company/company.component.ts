@@ -66,7 +66,6 @@ export class CompanyComponent {
       this.apiService.addCompany(company)
         .subscribe(() => {
           this.notificationService.success('Company added')
-          this.companiesService.addCompany(company);
           this.router.navigate(['/companies']);
         });
     }
@@ -75,7 +74,6 @@ export class CompanyComponent {
   onDelete() {
     this.apiService.deleteCompany(this.company.id)
       .subscribe(() => {
-        this.companiesService.deleteCompany(this.company.id);
         this.notificationService.warning('Company deleted');
         this.router.navigate(['/companies']);
       })

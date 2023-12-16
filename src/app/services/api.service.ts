@@ -20,9 +20,7 @@ export class ApiService {
     return this.http
       .get<Company[]>(this.companiesApi)
       .pipe(
-        tap((companies) => {
-          this.companiesService.updateCompanies(companies);
-        })
+        tap((companies) => this.companiesService.updateCompanies(companies))
       );
   }
 
@@ -30,14 +28,16 @@ export class ApiService {
     return this.http
       .get<Contact[]>(this.contactsApi)
       .pipe(
-        tap((contacts) => {
-          this.contactsService.updateContacts(contacts);
-        })
+        tap((contacts) => this.contactsService.updateContacts(contacts))
       );
   }
 
   addCompany(company: Company) {
-    return this.http.post<Company>(`${this.companiesApi}`, company);
+    return this.http
+      .post<Company>(`${this.companiesApi}`, company)
+      .pipe(
+        tap(() => this.companiesService.addCompany(company))
+      );
   }
 
   updateCompany(company: Company) {
@@ -45,11 +45,19 @@ export class ApiService {
   }
 
   deleteCompany(id: number) {
-    return this.http.delete<number>(`${this.companiesApi}/${id}`);
+    return this.http
+      .delete<number>(`${this.companiesApi}/${id}`)
+      .pipe(
+        tap(() => this.companiesService.deleteCompany(id))
+      );
   }
 
   addContact(contact: Contact) {
-    return this.http.post<Contact>(`${this.contactsApi}`, contact);
+    return this.http
+      .post<Contact>(`${this.contactsApi}`, contact)
+      .pipe(
+        tap(() => this.contactsService.addContact(contact))
+      );
   }
 
   updateContact(contact: Contact) {
@@ -57,6 +65,10 @@ export class ApiService {
   }
 
   deleteContact(id: number) {
-    return this.http.delete<number>(`${this.contactsApi}/${id}`);
+    return this.http
+      .delete<number>(`${this.contactsApi}/${id}`)
+      .pipe(
+        tap(() => this.contactsService.deleteContact(id))
+      );
   }
 }
