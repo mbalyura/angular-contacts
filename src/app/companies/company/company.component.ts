@@ -56,7 +56,6 @@ export class CompanyComponent {
     if (this.editMode) {
       const company = this.companiesService.getCompany(this.companyId);
       const contacts = this.companiesService.getCompanyContacts(this.companyId);
-      console.log('contacts', contacts)
 
       companyName = company.name;
       companyAddress = company.address;

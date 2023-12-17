@@ -36,7 +36,6 @@ export class ContactComponent {
   ngOnInit() {
     this.contactId = +this.route.snapshot.params['id'];
     this.editMode = !!this.route.snapshot.params['id'];
-    console.log('this.editMode', this.editMode)
 
     if (this.editMode) {
       this.contact = this.contactsService.getContact(this.contactId);
