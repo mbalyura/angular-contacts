@@ -17,7 +17,7 @@ export class CompaniesResolverService implements Resolve<Company[]> {
     const companies = this.companyService.getCompanies();
 
     if (!companies.length) {
-      return this.apiService.fetchCompanies()
+      return this.apiService.fetchCompanies();
     } else {
       return companies;
     }
