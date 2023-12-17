@@ -9,8 +9,7 @@
     "start-server": "node src/server/index.js",
     "start": "npm run start-server & ng serve",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "postinstall": "npm run build"
+    "watch": "ng build --watch --configuration development"
   },
   "private": true,
   "dependencies": {

@@ -11,8 +11,11 @@ import { Contact } from '../models/contact.model';
   providedIn: 'root'
 })
 export class ApiService {
-  companiesApi = 'http://localhost:3000/companies'; //run json-server to reach!
-  contactsApi = 'http://localhost:3000/contacts'; //run json-server to reach!
+  // companiesApi = 'http://localhost:3000/companies'; //run json-server to reach!
+  // contactsApi = 'http://localhost:3000/contacts'; //run json-server to reach!
+
+  companiesApi = 'https://angular-contacts-28e01-default-rtdb.europe-west1.firebasedatabase.app/companies.json'; //run json-server to reach!
+  contactsApi = 'https://angular-contacts-28e01-default-rtdb.europe-west1.firebasedatabase.app/contacts.json'; //run json-server to reach!
 
   constructor(private http: HttpClient, private companiesService: CompaniesService, private contactsService: ContactsService) { }
 
