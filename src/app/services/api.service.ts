@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CompaniesService } from './companies.service';
 import { HttpClient } from '@angular/common/http';
-import { map, tap } from 'rxjs';
+import { tap } from 'rxjs';
 
 import { Company } from '../models/company.model';
 import { ContactsService } from './contacts.service';

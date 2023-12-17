@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Company } from '../models/company.model';
 import { Subject } from 'rxjs';
+
 import { Contact } from '../models/contact.model';
-import { CompaniesService } from './companies.service';
 
 @Injectable({
   providedIn: 'root'
@@ -31,15 +30,9 @@ export class ContactsService {
 
   deleteContact(id: number) {
     this.contacts = this.contacts.filter(contact => contact.id !== id);
-    // this.contactsChanged.next(this.contacts);
   }
-
-  // updateContact(index: number, newContact: Contact) {
-  //   this.contacts[index] = newContact;
-  // }
 
   updateContacts(contacts: Contact[]) {
     this.contacts = contacts;
-    // this.contactsChanged.next(this.contacts);
   }
 }

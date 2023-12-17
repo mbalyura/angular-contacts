@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { CompaniesService } from '../services/companies.service';
 import { Company } from '../models/company.model';
 
@@ -10,7 +11,7 @@ import { Company } from '../models/company.model';
 export class CompaniesComponent implements OnInit {
   companies: Company[] = [];
 
-  constructor(private companiesService: CompaniesService) {}
+  constructor(private companiesService: CompaniesService) { }
 
   ngOnInit() {
     this.companies = this.companiesService.getCompanies();

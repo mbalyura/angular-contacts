@@ -1,14 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 import { ContactsComponent } from './contacts.component';
-import { RouterModule } from '@angular/router';
 import { ContactComponent } from './contact/contact.component';
-import { FormsModule } from '@angular/forms';
 import { CompaniesResolverService } from '../services/companies-resolver.service';
 import { ContactsResolverService } from '../services/contacts-resolver.service';
-
-
 
 @NgModule({
   declarations: [

@@ -1,10 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+
 import { Contact } from 'src/app/models/contact.model';
+import { Company } from 'src/app/models/company.model';
 import { Roles } from '../../models/contact.model'
 import { ContactsService } from 'src/app/services/contacts.service';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Company } from 'src/app/models/company.model';
 import { CompaniesService } from 'src/app/services/companies.service';
 import { ApiService } from 'src/app/services/api.service';
 import { NotificationService } from 'src/app/services/notification.service';
@@ -35,19 +36,17 @@ export class ContactComponent {
   ngOnInit() {
     this.contactId = +this.route.snapshot.params['id'];
     this.editMode = !!this.route.snapshot.params['id'];
+    console.log('this.editMode', this.editMode)
 
     if (this.editMode) {
       this.contact = this.contactsService.getContact(this.contactId);
-      this.company = this.companiesService.getCompanyByContact(this.contactId);
+      if (!this.contact) {
+        this.router.navigate(['/not-found']);
+      } else {
+        this.company = this.companiesService.getCompanyByContact(this.contactId);
+        setTimeout(this.prefillForm.bind(this), 1);
+      }
     }
-    // this.route.params.subscribe((params: Params) => {
-    //   this.contactId = +params['id'];
-    //   this.editMode = !!params['id'];
-    //   this.contact = this.contactsService.getContact(this.contactId);
-    //   this.company = this.companiesService.getCompanyByContact(this.contactId);
-    // })
-
-    this.editMode && setTimeout(this.prefillForm.bind(this), 1);
   }
 
   prefillForm() {
@@ -69,7 +68,7 @@ export class ContactComponent {
       this.apiService.updateContact(this.contact)
         .subscribe(() => this.notificationService.success('Contact updated'));
     } else {
-      const {name, lastname, phone, position} =  this.contactForm.form.value
+      const { name, lastname, phone, position } = this.contactForm.form.value
       const id = this.contactsService.getNewId();
       const contact = new Contact(id, name, lastname, phone, position)
 
@@ -86,13 +85,12 @@ export class ContactComponent {
       .subscribe(() => {
         this.notificationService.warning('Contact deleted');
         this.router.navigate(['/contacts']);
+
+        if (this.company) {
+          this.company.contacts = this.company.contacts.filter(contactId => contactId !== this.contact.id);
+          this.apiService.updateCompany(this.company)
+            .subscribe(() => this.notificationService.success('Company updated'))
+        }
       })
-
-    if (this.company) {
-      this.company.contacts = this.company.contacts.filter(contactId => contactId !== this.contact.id);
-      this.apiService.updateCompany(this.company)
-        .subscribe(() => this.notificationService.success('Company updated'))
-    }
-
   }
 }

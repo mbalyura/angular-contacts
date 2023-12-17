@@ -56,11 +56,25 @@
     </select>
     <span class="help" *ngIf="position.invalid && position.touched">This field is required</span>
   </div>
+
+  <div class="form-group">
+    <label>Company</label>
+    <div class="company" *ngIf="company">
+      {{company.name | uppercase}}, {{company.address}}
+      <button [routerLink]="['/companies', company.id]" class="btn">Edit</button>
+    </div>
+    <div style="margin-top: 16px;" *ngIf="!company">
+      This contact hasn't been added to any companies
+    </div>
+  </div>
+
+  <hr>
+
   <div class="btn-group">
     <button
       class="btn"
       type="submit"
-      [disabled]="contactForm.invalid"
+      [disabled]="contactForm.invalid || contactForm.pristine"
     >
       {{ editMode ? "Update" : "Add" }}
     </button>
@@ -74,11 +88,3 @@
     </button>
   </div>
 </form>
-<hr>
-
-<div class="company" *ngIf="company">
-  <h3>Company:</h3>
-  <a [routerLink]="['/companies', company.id]">
-    {{company.name}} {{company.address}}
-  </a>
-</div>

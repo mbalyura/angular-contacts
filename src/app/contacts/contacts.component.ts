@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+
 import { ContactsService } from '../services/contacts.service';
 import { Contact } from '../models/contact.model';
 
@@ -10,12 +11,9 @@ import { Contact } from '../models/contact.model';
 export class ContactsComponent {
   contacts: Contact[] = [];
 
-  constructor(private contactsService: ContactsService) {}
+  constructor(private contactsService: ContactsService) { }
 
   ngOnInit() {
     this.contacts = this.contactsService.getContacts();
-    // this.contactsService.contactsChanged.subscribe((contacts) => {
-    //   this.contacts = contacts;
-    // })
   }
 }

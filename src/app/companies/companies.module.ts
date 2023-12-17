@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { CompaniesComponent } from './companies.component';
 import { CompanyComponent } from './company/company.component';
-import { FormsModule } from '@angular/forms';
 import { CompaniesResolverService } from '../services/companies-resolver.service';
 import { ContactsResolverService } from '../services/contacts-resolver.service';
 
@@ -15,7 +15,7 @@ import { ContactsResolverService } from '../services/contacts-resolver.service';
   ],
   imports: [
     CommonModule,
-    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild([
       {
         path: '',
@@ -24,6 +24,7 @@ import { ContactsResolverService } from '../services/contacts-resolver.service';
       {
         path: 'new',
         component: CompanyComponent,
+        resolve: [ContactsResolverService],
       },
       {
         path: ':id',

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+
 import { Company } from '../models/company.model';
 import { ContactsService } from './contacts.service';
-import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ export class CompaniesService {
 
   private companies: Company[] = [];
 
-  constructor(private contactsService: ContactsService) {}
+  constructor(private contactsService: ContactsService) { }
 
   getNewId() {
     const lastId = this.companies.reduce((acc, company) => acc > company.id ? acc : company.id, 0);

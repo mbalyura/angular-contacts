@@ -3,8 +3,6 @@ import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/r
 import { Observable } from 'rxjs';
 
 import { ApiService } from './api.service';
-import { CompaniesService } from './companies.service';
-import { Company } from '../models/company.model';
 import { Contact } from '../models/contact.model';
 import { ContactsService } from './contacts.service';
 
