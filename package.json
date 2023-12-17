@@ -6,11 +6,11 @@
   },
   "scripts": {
     "ng": "ng",
-    "json-server": "npx json-server src/server/db.json",
-    "start": "npm run json-server --watch & ng serve",
+    "start-server": "node src/server/index.js",
+    "start": "npm run start-server & ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "postinstall": "npm run build"
   },
   "private": true,
   "dependencies": {
