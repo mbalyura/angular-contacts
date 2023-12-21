@@ -1,18 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
 
 import { Company } from '../models/company.model';
 import { ContactsService } from './contacts.service';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CompaniesService {
-  companiesChanged = new Subject<Company[]>();
-
   private companies: Company[] = [];
 
-  constructor(private contactsService: ContactsService) { }
+  constructor(private contactsService: ContactsService, private apiService: ApiService) { }
 
   getNewId() {
     const lastId = this.companies.reduce((acc, company) => acc > company.id ? acc : company.id, 0);
@@ -43,15 +41,19 @@ export class CompaniesService {
 
   addCompany(company) {
     this.companies.push(company);
+    return this.apiService.addCompany(company);
+  }
+
+  updateCompany(company: Company) {
+    return this.apiService.updateCompany(company);
   }
 
   deleteCompany(id) {
     this.companies = this.companies.filter(company => company.id !== id);
-    this.companiesChanged.next(this.companies);
+    return this.apiService.deleteCompany(id);
   }
 
   updateCompanies(companies: Company[]) {
     this.companies = companies;
-    this.companiesChanged.next(this.companies);
   }
 }

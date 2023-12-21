@@ -1,35 +1,8 @@
 {
   "companies": [
     {
-      "id": 0,
-      "name": "Namegen",
-      "address": "37 Hill Street, Whipholt, Comoros",
-      "contacts": [
-        0,
-        1
-      ]
-    },
-    {
-      "id": 1,
-      "name": "Insuron",
-      "address": "96 Morton Street, Conway, French Polynesia",
-      "contacts": [
-        2,
-        3,
-        4
-      ]
-    },
-    {
-      "id": 2,
-      "name": "Eventage",
-      "address": "98 Colby Court, Delco, Ukraine",
-      "contacts": [
-        5
-      ]
-    },
-    {
       "id": 3,
-      "name": "Suremax",
+      "name": "Suremax123",
       "address": "20 Portal Street, Succasunna, Burundi",
       "contacts": [
         6,
@@ -94,15 +67,23 @@
         23,
         24
       ]
+    },
+    {
+      "id": 10,
+      "name": "Devserver1",
+      "address": "71 Frank Court, Belgreen, Thailand111",
+      "contacts": [
+        0
+      ]
     }
   ],
   "contacts": [
     {
       "id": 0,
-      "name": "Meghan",
+      "name": "Meghan111",
       "lastname": "Gibson",
       "phone": 805549396,
-      "position": "cto"
+      "position": "developer"
     },
     {
       "id": 1,

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 import { ApiService } from './api.service';
 import { Contact } from '../models/contact.model';
@@ -17,7 +17,8 @@ export class ContactsResolverService implements Resolve<Contact[]> {
     const contacts = this.contactsService.getContacts();
 
     if (!contacts.length) {
-      return this.apiService.fetchContacts();
+      return this.apiService.fetchContacts()
+        .pipe(tap((contacts) => this.contactsService.updateContacts(contacts)));
     } else {
       return contacts;
     }

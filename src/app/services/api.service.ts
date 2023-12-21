@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
-import { CompaniesService } from './companies.service';
 import { HttpClient } from '@angular/common/http';
-import { EMPTY, catchError, tap } from 'rxjs';
+import { EMPTY, catchError } from 'rxjs';
 
 import { Company } from '../models/company.model';
-import { ContactsService } from './contacts.service';
 import { Contact } from '../models/contact.model';
 import { NotificationService } from './notification.service';
 
@@ -17,8 +15,6 @@ export class ApiService {
 
   constructor(
     private http: HttpClient,
-    private companiesService: CompaniesService,
-    private contactsService: ContactsService,
     private notificationServis: NotificationService
   ) { }
 
@@ -32,7 +28,6 @@ export class ApiService {
       .get<Company[]>(this.companiesApi)
       .pipe(
         catchError(this.handleError.bind(this)),
-        tap((companies) => this.companiesService.updateCompanies(companies))
       );
   }
 
@@ -41,7 +36,6 @@ export class ApiService {
       .get<Contact[]>(this.contactsApi)
       .pipe(
         catchError(this.handleError.bind(this)),
-        tap((contacts) => this.contactsService.updateContacts(contacts))
       );
   }
 
@@ -50,7 +44,6 @@ export class ApiService {
       .post<Company>(`${this.companiesApi}`, company)
       .pipe(
         catchError(this.handleError.bind(this)),
-        tap(() => this.companiesService.addCompany(company))
       );
   }
 
@@ -67,7 +60,6 @@ export class ApiService {
       .delete<number>(`${this.companiesApi}/${id}`)
       .pipe(
         catchError(this.handleError.bind(this)),
-        tap(() => this.companiesService.deleteCompany(id))
       );
   }
 
@@ -76,7 +68,6 @@ export class ApiService {
       .post<Contact>(`${this.contactsApi}`, contact)
       .pipe(
         catchError(this.handleError.bind(this)),
-        tap(() => this.contactsService.addContact(contact))
       );
   }
 
@@ -93,7 +84,6 @@ export class ApiService {
       .delete<number>(`${this.contactsApi}/${id}`)
       .pipe(
         catchError(this.handleError.bind(this)),
-        tap(() => this.contactsService.deleteContact(id))
       );
   }
 }

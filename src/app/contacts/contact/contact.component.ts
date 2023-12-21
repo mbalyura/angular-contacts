@@ -7,7 +7,6 @@ import { Company } from 'src/app/models/company.model';
 import { Roles } from '../../models/contact.model'
 import { ContactsService } from 'src/app/services/contacts.service';
 import { CompaniesService } from 'src/app/services/companies.service';
-import { ApiService } from 'src/app/services/api.service';
 import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
@@ -27,7 +26,6 @@ export class ContactComponent {
   constructor(
     private contactsService: ContactsService,
     private companiesService: CompaniesService,
-    private apiService: ApiService,
     private notificationService: NotificationService,
     private route: ActivatedRoute,
     private router: Router
@@ -64,14 +62,14 @@ export class ContactComponent {
       this.contact.phone = this.contactForm.form.value.phone;
       this.contact.position = this.contactForm.form.value.position;
 
-      this.apiService.updateContact(this.contact)
+      this.contactsService.updateContact(this.contact)
         .subscribe(() => this.notificationService.success('Contact updated'));
     } else {
       const { name, lastname, phone, position } = this.contactForm.form.value
       const id = this.contactsService.getNewId();
       const contact = new Contact(id, name, lastname, phone, position)
 
-      this.apiService.addContact(contact)
+      this.contactsService.addContact(contact)
         .subscribe(() => {
           this.notificationService.success('Contact added')
           this.router.navigate(['/contacts']);
@@ -80,14 +78,14 @@ export class ContactComponent {
   }
 
   onDelete() {
-    this.apiService.deleteContact(this.contact.id)
+    this.contactsService.deleteContact(this.contact.id)
       .subscribe(() => {
         this.notificationService.warning('Contact deleted');
         this.router.navigate(['/contacts']);
 
         if (this.company) {
           this.company.contacts = this.company.contacts.filter(contactId => contactId !== this.contact.id);
-          this.apiService.updateCompany(this.company)
+          this.companiesService.updateCompany(this.company)
             .subscribe(() => this.notificationService.success('Company updated'))
         }
       })

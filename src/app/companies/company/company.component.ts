@@ -1,9 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormArray, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Company } from 'src/app/models/company.model';
 import { Contact } from 'src/app/models/contact.model';
-import { ApiService } from 'src/app/services/api.service';
 import { CompaniesService } from 'src/app/services/companies.service';
 import { ContactsService } from 'src/app/services/contacts.service';
 import { NotificationService } from 'src/app/services/notification.service';
@@ -26,7 +25,6 @@ export class CompanyComponent {
   constructor(
     private companiesService: CompaniesService,
     private contactsService: ContactsService,
-    private apiService: ApiService,
     private notificationService: NotificationService,
     private route: ActivatedRoute,
     private router: Router
@@ -76,13 +74,13 @@ export class CompanyComponent {
       this.company.name = this.companyForm.value.name;
       this.company.address = this.companyForm.value.address;
       this.company.contacts = this.companyForm.value.contacts;
-      this.apiService.updateCompany(this.company)
+      this.companiesService.updateCompany(this.company)
         .subscribe(() => this.notificationService.success('Company updated'));
     } else {
       const { name, address, contacts } = this.companyForm.value
       const id = this.companiesService.getNewId();
       const company = new Company(id, name, address, contacts)
-      this.apiService.addCompany(company)
+      this.companiesService.addCompany(company)
         .subscribe(() => {
           this.notificationService.success('Company added')
           this.router.navigate(['/companies']);
@@ -95,7 +93,7 @@ export class CompanyComponent {
   }
 
   onDelete() {
-    this.apiService.deleteCompany(this.company.id)
+    this.companiesService.deleteCompany(this.company.id)
       .subscribe(() => {
         this.notificationService.warning('Company deleted');
         this.router.navigate(['/companies']);
